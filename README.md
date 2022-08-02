@@ -20,7 +20,7 @@ import 'package:dot_bottom_nav/dot_bottom_nav.dart';
 
 ## Example
 
-
+<img src="https://raw.githubusercontent.com/abhiiishek2000/dot_bottom_nav/master/screenshot/Screenshot_20220803-013110.png"></img>
 
 ```dart
 SafeArea(
