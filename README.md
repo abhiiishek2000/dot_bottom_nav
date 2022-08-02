@@ -20,7 +20,7 @@ import 'package:dot_bottom_nav/dot_bottom_nav.dart';
 
 ## Example
 
-
+<img src="https://raw.githubusercontent.com/abhiiishek2000/dot_bottom_nav/master/screenshot/Screenshot_20220803-013110.png" width="300" height="600"></img>
 
 ```dart
 SafeArea(
@@ -38,7 +38,7 @@ SafeArea(
                 subtitle: Text('Name $index'),
               );
             }),
-        bottomNavigationBar: DotIndicatorNavBar(
+        bottomNavigationBar: DotBottomBar(
           currentIndex: selectedIndex,
           selectedColor: Colors.indigo,
           unSelectedColor: Colors.black54,

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 
 enum IndicatorType { top, bottom }
-class DotIndicatorNavBar extends StatelessWidget {
-  DotIndicatorNavBar({Key? key,
+class DotBottomBar extends StatelessWidget {
+  DotBottomBar({Key? key,
     this.backgroundColor,
     this.selectedColor,
     required this.navBarItems,
@@ -68,7 +68,7 @@ class DotIndicatorNavBar extends StatelessWidget {
           children: [
             for (int i = 0; i < navBarItems.length; i++) ...[
               Expanded(
-                child: DotIndicatorNavBarItems(
+                child: DotBottomBarItems(
                   selectedColor: selectedColor,
                   unSelectedColor: unSelectedColor,
                   icon: navBarItems[i].icon,
@@ -106,7 +106,7 @@ class NavBarItems {
   });
 }
 
-class DotIndicatorNavBarItems extends StatelessWidget {
+class DotBottomBarItems extends StatelessWidget {
   final IconData? icon;
   final String? label;
   final Color? selectedColor;
@@ -124,7 +124,7 @@ class DotIndicatorNavBarItems extends StatelessWidget {
   final Color? dotIndicatorColor;
   final IndicatorType indicatorType;
 
-  DotIndicatorNavBarItems({Key? key,
+  DotBottomBarItems({Key? key,
     this.icon,
     this.label,
     this.selectedColor,
