@@ -4,3 +4,4 @@
 2. Floating bottom nav
 3. Dot indicator
 4. Customizable according to need
+5. Animated dot indicator

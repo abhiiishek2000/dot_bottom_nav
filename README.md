@@ -1,11 +1,12 @@
 
 # dot_bottom_nav
 
-A flutter package that provides you to capture any widget to image. The features is:
+A flutter package that provides awesome bottom navigation bar with dot indicator. The features is:
 1. Rounded bottom nav
 2. Floating bottom nav
 3. Dot indicator
 4. Customizable according to need
+5. Animated dot indicator
 ## Installation 
 
 1. Add the latest version of package to your pubspec.yaml (and run`dart pub get`):
@@ -38,7 +39,7 @@ SafeArea(
                 subtitle: Text('Name $index'),
               );
             }),
-        bottomNavigationBar: DotBottomBar(
+        bottomNavigationBar: DotBottomNav(
           currentIndex: selectedIndex,
           selectedColor: Colors.indigo,
           unSelectedColor: Colors.black54,

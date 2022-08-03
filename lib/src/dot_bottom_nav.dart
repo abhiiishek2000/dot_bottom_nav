@@ -1,12 +1,14 @@
 
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 
 enum IndicatorType { top, bottom }
-class DotBottomBar extends StatelessWidget {
-  DotBottomBar({Key? key,
+class DotBottomNav extends StatelessWidget {
+  DotBottomNav({Key? key,
     this.backgroundColor,
     this.selectedColor,
     required this.navBarItems,
@@ -68,7 +70,7 @@ class DotBottomBar extends StatelessWidget {
           children: [
             for (int i = 0; i < navBarItems.length; i++) ...[
               Expanded(
-                child: DotBottomBarItems(
+                child: DotBottomNavItems(
                   selectedColor: selectedColor,
                   unSelectedColor: unSelectedColor,
                   icon: navBarItems[i].icon,
@@ -106,7 +108,7 @@ class NavBarItems {
   });
 }
 
-class DotBottomBarItems extends StatelessWidget {
+class DotBottomNavItems extends StatelessWidget {
   final IconData? icon;
   final String? label;
   final Color? selectedColor;
@@ -120,11 +122,11 @@ class DotBottomBarItems extends StatelessWidget {
   final int index;
   final Function(int) onTap;
   final bool? enableDotIndicator;
-  final double? dotIndicatorWidth;
-  final Color? dotIndicatorColor;
+  final double dotIndicatorWidth;
+  final Color dotIndicatorColor;
   final IndicatorType indicatorType;
 
-  DotBottomBarItems({Key? key,
+  DotBottomNavItems({Key? key,
     this.icon,
     this.label,
     this.selectedColor,
@@ -134,12 +136,12 @@ class DotBottomBarItems extends StatelessWidget {
     this.selectedIconSize,
     this.unselectedIconSize = 24,
     this.splashColor,
-    this.dotIndicatorColor,
+    required this.dotIndicatorColor,
     this.currentIndex,
     required this.onTap,
     required this.index,
     this.enableDotIndicator,
-    this.dotIndicatorWidth,
+    required this.dotIndicatorWidth,
     this.indicatorType = IndicatorType.top,
   }) : super(key: key);
 
@@ -158,13 +160,7 @@ class DotBottomBarItems extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            currentIndex ==index && indicatorType == IndicatorType.top && enableDotIndicator==true ? Container(
-              height: dotIndicatorWidth,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: dotIndicatorColor
-              ),
-            ) : Container(),
+            currentIndex ==index && indicatorType == IndicatorType.top && enableDotIndicator==true ? DotIndicator(dotIndicatorColor: dotIndicatorColor,dotIndicatorWidth: dotIndicatorWidth,)  : Container(),
             const SizedBox(height: 8),
             Icon(
               icon,
@@ -189,16 +185,56 @@ class DotBottomBarItems extends StatelessWidget {
                     : unSelectedColor,
               ),
             ),
-            currentIndex ==index && indicatorType == IndicatorType.bottom && enableDotIndicator==true? Container(
-              height: dotIndicatorWidth,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: dotIndicatorColor
-              ),
-            ) : Container(),
+            currentIndex ==index && indicatorType == IndicatorType.bottom && enableDotIndicator==true
+                ? DotIndicator(dotIndicatorColor: dotIndicatorColor,dotIndicatorWidth: dotIndicatorWidth,)
+                : Container(),
           ],
         ),
       ),
     );
   }
 }
+
+class DotIndicator extends StatefulWidget {
+  const DotIndicator({Key? key,required this.dotIndicatorColor,required this.dotIndicatorWidth}) : super(key: key);
+  final double dotIndicatorWidth;
+  final Color dotIndicatorColor;
+
+  @override
+  State<DotIndicator> createState() => _DotIndicatorState();
+}
+
+class _DotIndicatorState extends State<DotIndicator> with SingleTickerProviderStateMixin {
+  double opacityLevel = 1.0;
+  late AnimationController  _animationController;
+
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    )..forward();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+        animation: _animationController,
+        builder: (BuildContext context, Widget? child) {
+          return Opacity(
+            opacity:_animationController.value,
+            child: child,
+          );
+        },
+        child: Container(
+          height: widget.dotIndicatorWidth,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: widget.dotIndicatorColor
+          ),
+        ));
+  }
+}
+
