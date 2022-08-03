@@ -1,7 +1,7 @@
 
 # dot_bottom_nav
 
-A flutter package that provides you to capture any widget to image. The features is:
+A flutter package that provides awesome bottom navigation bar with dot indicator. The features is:
 1. Rounded bottom nav
 2. Floating bottom nav
 3. Dot indicator
